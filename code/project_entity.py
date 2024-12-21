@@ -417,10 +417,11 @@ class ProjectCRUD:
         Raises:
             HTTPException: If the project cannot be found.
         """
+        request_dict = request.initialized_fields()
+        if not request_dict:
+            raise HTTPException(status_code=422, detail=f"No fields to update. Omitting.")
         with self.SQL_ALCHEMY_SESSION() as session:
             project = self.__perform_single_entity_op(project_id, session)
-
-            request_dict = request.initialized_fields()
             if 'date_range' in request_dict:
                 request_dict['date_range'] = self.transform_date_range(request.date_range)
             if 'area_of_interest' in request_dict:
