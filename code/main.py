@@ -14,7 +14,6 @@ logger = logging.getLogger('uvicorn.error')
 
 MAX_RECONNECT_RETRIES = 4
 
-# TODO Unit tests
 def main():
     for retry in range(MAX_RECONNECT_RETRIES):
         try:
@@ -22,7 +21,6 @@ def main():
             SQL_ALCHEMY_BASE.metadata.create_all(SQL_ALCHEMY_DB)
             break
         except OperationalError as e:
-            # TODO Maybe do a health check call?
             logger.warning(e)
             if (retry + 1) == MAX_RECONNECT_RETRIES:
                 raise OperationalError("Max retries for connecting database reached. Exiting.", None, e)

@@ -85,7 +85,7 @@ class ProjectAOIEntity(SQL_ALCHEMY_BASE):
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     general_id: Mapped[UUID] = mapped_column(ForeignKey('projects_general.id', ondelete='CASCADE'), nullable=False)
-    area_of_interest: Mapped[Geometry] = mapped_column(Geometry('GEOMETRY', srid=4326))
+    area_of_interest: Mapped[Geometry] = mapped_column(Geometry('GEOMETRY', srid=4326), nullable=False)
     general_entities: Mapped[List["ProjectGeneralEntity"]] = relationship("ProjectGeneralEntity", back_populates="area_of_interest_list")
 
 class BasicProjectRequestModel(BaseModel):
