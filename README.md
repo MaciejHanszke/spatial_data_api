@@ -17,3 +17,6 @@ To run the project in the headless mode use `docker-compose up -d`
 ## Interaction
 To learn what API endpoints are available and how each one of them can be used, 
 access the API docs http://localhost/docs#/ once the container is up and running
+
+## Running tests
+To run tests, run `pytest .` command in tests/ folder.

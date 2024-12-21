@@ -6,6 +6,7 @@ class MockSession:
     def __init__(self):
         super().__init__()
         self.internal_counter = {}
+        self.return_empty = False
 
     def __add_internal_count(self, function_name):
         if function_name not in self.internal_counter:
@@ -33,6 +34,8 @@ class MockSession:
     def first(self, *args, **kwargs):
         self.__add_internal_count("query_filter_first")
         from code.project_entity import ProjectGeneralEntity
+        if self.return_empty:
+            return None
         return ProjectGeneralEntity(**{'id': "3c8e58d8-953d-41e6-a27c-29d0a228121b"})
 
     def all(self, *args, **kwargs):
