@@ -145,6 +145,9 @@ class BasicProjectRequestModel(BaseModel):
         """
         test_area_of_interest = copy.deepcopy(self.area_of_interest)
 
+        if geojson_validator.validate_structure(test_area_of_interest):
+            raise ValueError("area_of_interest has invalid structure")
+
         if geojson_validator.validate_geometries(test_area_of_interest).get('invalid'):
             raise ValueError("area_of_interest has invalid geometry")
 
