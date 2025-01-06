@@ -3,6 +3,6 @@ import sys
 PROJECT_PATH = os.getcwd()
 PROJECT_PATH = "\\".join(PROJECT_PATH.split("\\")[:-1])
 SOURCE_PATH = os.path.join(
-    PROJECT_PATH,"code"
+    PROJECT_PATH,"src"
 )
 sys.path.append(SOURCE_PATH)

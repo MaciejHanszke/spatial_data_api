@@ -1,16 +1,3 @@
-service_healthy_sample_response = {
-        200: {
-            "description": "App up and running",
-            "content": {
-                "application/json": {
-                    "example": {
-                        "detail": "OK"
-                    }
-                }
-            }
-        }
-    }
-
 create_project_sample_request = {
         "json_schema_extra": {
             "examples": [

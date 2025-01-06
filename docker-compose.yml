@@ -16,7 +16,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./code:/app/code
+      - ./src:/app/src
 
   postgres:
     image: postgis/postgis:latest

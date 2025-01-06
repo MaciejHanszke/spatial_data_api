@@ -10,7 +10,7 @@ RUN apt-get update \
 WORKDIR /app
 
 COPY ./requirements.txt .
-COPY ./code .
+COPY src .
 
 RUN pip install -r requirements.txt
 

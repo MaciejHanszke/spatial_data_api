@@ -30,7 +30,7 @@ from tests.test_project_entity_constants import test_cu, test_cu_no_date, \
          (test_cu_invalid_aoi, test_cu_invalid_aoi_expected),
      ])
 def test_create_project_request_model(test_input: dict, expected: Optional[tuple]):
-    from code.project_entity import CreateProjectRequestModel
+    from src.project.crud import CreateProjectRequestModel
     from pydantic_core import ValidationError
     raised = False
     try:
@@ -58,7 +58,7 @@ def test_create_project_request_model(test_input: dict, expected: Optional[tuple
          (test_cu_invalid_aoi, test_cu_invalid_aoi_expected),
      ])
 def test_update_project_request_model(test_input: dict, expected):
-    from code.project_entity import UpdateProjectRequestModel
+    from src.project.crud import UpdateProjectRequestModel
     from pydantic_core import ValidationError
     raised = False
     try:
@@ -78,7 +78,7 @@ def test_update_project_request_model(test_input: dict, expected):
          test_init_fields_3,
      ])
 def test_initialized_fields(test_input_expected):
-    from code.project_entity import UpdateProjectRequestModel
+    from src.project.crud import UpdateProjectRequestModel
     assert UpdateProjectRequestModel(**test_input_expected).initialized_fields() == test_input_expected
 
 @pytest.mark.parametrize("test_input,expected",
@@ -96,7 +96,7 @@ def test_transform_date_range(project_crud, test_input, expected):
          test_cu_3
      ])
 def test_insert(mock_session, project_crud, test_input):
-    from code.project_entity import CreateProjectRequestModel
+    from src.project.crud import CreateProjectRequestModel
     new_project = CreateProjectRequestModel(**test_input)
 
     result = project_crud.insert(new_project)
@@ -136,7 +136,7 @@ def test_delete(mock_session, project_crud):
     assert mock_session.internal_counter["commit"] == 1
 
 def test_update(mock_session, project_crud):
-    from code.project_entity import UpdateProjectRequestModel
+    from src.project.crud import UpdateProjectRequestModel
     project_id = "3c8e58d8-953d-41e6-a27c-29d0a228121b"
     result = project_crud.update(project_id, UpdateProjectRequestModel(**test_init_fields_2))
     assert result["detail"] == f"Project {project_id} updated"

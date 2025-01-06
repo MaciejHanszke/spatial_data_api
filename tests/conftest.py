@@ -22,7 +22,7 @@ class MockSession:
 
     def delete(self, *args, **kwargs):
         self.__add_internal_count("delete")
-        from code.project_entity import ProjectGeneralEntity
+        from src.project.crud import ProjectGeneralEntity
         return ProjectGeneralEntity(**{'id': "3c8e58d8-953d-41e6-a27c-29d0a228121b"})
 
     def query(self, *args, **kwargs):
@@ -33,14 +33,14 @@ class MockSession:
 
     def first(self, *args, **kwargs):
         self.__add_internal_count("query_filter_first")
-        from code.project_entity import ProjectGeneralEntity
+        from src.project.crud import ProjectGeneralEntity
         if self.return_empty:
             return None
         return ProjectGeneralEntity(**{'id': "3c8e58d8-953d-41e6-a27c-29d0a228121b"})
 
     def all(self, *args, **kwargs):
         self.__add_internal_count("query_all")
-        from code.project_entity import ProjectGeneralEntity
+        from src.project.crud import ProjectGeneralEntity
         return [ProjectGeneralEntity(**{'id': "3c8e58d8-953d-41e6-a27c-29d0a228121b"}),
                 ProjectGeneralEntity(**{'id': "3c8e58d8-953d-41e6-a27c-29d0a228123d"})]
 
@@ -65,5 +65,5 @@ def mock_session():
 
 @pytest.fixture
 def project_crud(mock_session):
-    from code.project_entity import ProjectCRUD
+    from src.project.crud import ProjectCRUD
     return ProjectCRUD(sql_alchemy_session=mock.Mock(return_value=mock_session))
